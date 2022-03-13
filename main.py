@@ -1,14 +1,14 @@
-import screen_brightness_control as sbc
+import screen_brightness_control as sbc, sys
 
-def set_middle():
-   for i in range(3):
-      sbc.set_brightness(value=50, display=i)
+def get_monitors():
+   return len(sbc.list_monitors())
 
+def set_bright():
+   value = int(sys.argv[1])
+   if value>=0 and value<=100:
+      for i in range(get_monitors()):
+         sbc.set_brightness(value=int(sys.argv[1]), display=i)
+   else:
+      print("[Error] Brightness value must be between 0 and 100")
 
-def set_full():
-   for i in range(3):
-      sbc.set_brightness(value=100, display=i)
-
-
-set_middle()
-# set_full()
+set_bright()
